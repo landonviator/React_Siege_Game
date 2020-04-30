@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import VitalitySpriteOne from './components/vitalitySpriteOne';
+import MonsterOnePoisonCounter from './components/m1PoisonCounters';
 import MonsterOneDeath from './components/monsterOneDeath';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
@@ -11,6 +12,7 @@ class App extends Component {
 
   state = {
     vitality: 6,
+    poison: 0,
     isDead: false
 };
 
@@ -24,6 +26,14 @@ vitalityIncrement = () => {
   this.setState({vitality: this.state.vitality += 1});
   this.setState({isDead: this.state.vitality < 1 ? this.state.isDead = true : this.state.isDead = false});
   console.log(this.checkDeathForSpinner);
+};
+
+poisonDecrement = () => {
+  this.setState({poison: this.state.poison > 0 ? this.state.poison -= 1 : this.state.poison = 0});
+};
+
+poisonIncrement = () => {
+  this.setState({poison: this.state.poison += 1});
 };
 
   render(){
@@ -56,6 +66,14 @@ vitalityIncrement = () => {
       onVitalityIncrement={this.vitalityIncrement}
       vitality={this.state.vitality}
     ></VitalitySpriteOne>
+
+    <div style={statsStyle}>
+    <MonsterOnePoisonCounter 
+    poison={this.state.poison}
+      onPoisonDecrement={this.poisonDecrement}
+      onPoisonIncrement={this.poisonIncrement}>
+    </MonsterOnePoisonCounter>
+    </div>
 
       <h4 style={statsStyle}>Status: <MonsterOneDeath onCheckDeathForSpinner={this.checkDeathForSpinner}
       vitality={this.state.vitality} isDead={this.state.isDead}
