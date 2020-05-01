@@ -103,7 +103,7 @@ advanceTurn = () => {
 
     </Card.Body>
     <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
+      <small className="text-white">Vigor: 3 - Fortitude: 2 - Move: 3 - Range: 2</small>
     </Card.Footer>
   </Card>
   </Col>
