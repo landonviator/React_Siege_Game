@@ -63,7 +63,7 @@ advanceTurn = () => {
   </Navbar>
   <Row>
     <Col></Col>
-    <Col xs={12} sm={12} md={8} lg={5}>
+    <Col md={8} lg={5}>
   <Card bg="dark" text="white" style={cardStyle}>
     <Card.Img variant="top" src={require('./LittleMonster-01.png')} />
     <Card.Body>
@@ -115,9 +115,9 @@ advanceTurn = () => {
 }
 
 const cardStyle ={
-  marginTop: '10px',
-  marginLeft: '24px',
-  marginRight: '24px'
+  marginTop: '8px',
+  marginLeft: '12px',
+  marginRight: '12px'
 }
 
 const vitalityPlusButton = {
