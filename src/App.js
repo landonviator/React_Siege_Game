@@ -3,9 +3,13 @@ import './App.css';
 import VitalitySpriteOne from './components/vitalitySpriteOne';
 import MonsterOnePoisonCounter from './components/m1PoisonCounters';
 import MonsterOneDeath from './components/monsterOneDeath';
+import AdvanceTurn from './components/advanceTurn';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 
 class App extends Component {
@@ -19,13 +23,11 @@ class App extends Component {
 vitalityDecrement = () => {
   this.setState({vitality: this.state.vitality > 0 ? this.state.vitality -= 1 : this.state.vitality = 0});
   this.setState({isDead: this.state.vitality < 1 ? this.state.isDead = true : this.state.isDead = false});
-  console.log(this.checkDeathForSpinner);
 };
 
 vitalityIncrement = () => {
   this.setState({vitality: this.state.vitality += 1});
   this.setState({isDead: this.state.vitality < 1 ? this.state.isDead = true : this.state.isDead = false});
-  console.log(this.checkDeathForSpinner);
 };
 
 poisonDecrement = () => {
@@ -34,6 +36,14 @@ poisonDecrement = () => {
 
 poisonIncrement = () => {
   this.setState({poison: this.state.poison += 1});
+};
+
+advanceTurn = () => {
+  this.setState({
+    vitality: this.state.poison > 0 ? this.state.vitality -= 1 : this.state.vitality -= 0,
+    poison: this.state.poison > 0 ? this.state.poison -= 1 : this.state.poison = 0,
+    isDead: this.state.vitality < 1 ? this.state.isDead = true : this.state.isDead = false
+  });
 };
 
   render(){
@@ -51,7 +61,9 @@ poisonIncrement = () => {
       Monster Siege Counter
     </Navbar.Brand>
   </Navbar>
-  <CardDeck>
+  <Row>
+    <Col></Col>
+    <Col xs={12} md={8} lg={5}>
   <Card bg="dark" text="white" style={cardStyle}>
     <Card.Img variant="top" src={require('./LittleMonster-01.png')} />
     <Card.Body>
@@ -75,43 +87,28 @@ poisonIncrement = () => {
     </MonsterOnePoisonCounter>
     </div>
 
-      <h4 style={statsStyle}>Status: <MonsterOneDeath onCheckDeathForSpinner={this.checkDeathForSpinner}
-      vitality={this.state.vitality} isDead={this.state.isDead}
-      ></MonsterOneDeath></h4>
+    <Row style={statsStyle}>
+      <Col>
+      <h5 style={statsStyle}>Status: <MonsterOneDeath onCheckDeathForSpinner={this.checkDeathForSpinner}
+      vitality={this.state.vitality} poison={this.state.poison} isDead={this.state.isDead} onAdvanceTurn={this.advanceTurn} 
+      ></MonsterOneDeath></h5>
+      </Col>
+      <Col></Col>
+      <Col>
+        <AdvanceTurn vitality={this.state.vitality} 
+        poison={this.state.poison} isDead={this.state.isDead} onAdvanceTurn={this.advanceTurn}
+        ></AdvanceTurn>
+      </Col>
+    </Row>
 
     </Card.Body>
     <Card.Footer>
       <small className="text-muted">Last updated 3 mins ago</small>
     </Card.Footer>
   </Card>
-  <Card bg="dark" text="white" style={cardStyle}>
-    <Card.Img variant="top" src={require('./LittleMonster-01.png')} />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-        This card has supporting text below as a natural lead-in to additional
-        content.{' '}
-      </Card.Text>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  <Card bg="dark" text="white" style={cardStyle}>
-    <Card.Img variant="top" src={require('./LittleMonster-01.png')} />
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This card has even longer content than the first to
-        show that equal height action.
-      </Card.Text>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-</CardDeck>
+  </Col>
+  <Col></Col>
+  </Row>
     </div>
   );
 }
