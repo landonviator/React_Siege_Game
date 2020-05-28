@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+A game counter implemented in React with Bootstrap. This counter acts as a counter for a board game that tracks a player’s monster stats such as health, attack, and defense. The app automatically lets the player know when their monster is unusable after their health reaches zero with a blinking indicator light. 
+
 ## Available Scripts
 
 In the project directory, you can run:
